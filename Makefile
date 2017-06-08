@@ -9,7 +9,7 @@ NGINX_NAME=$(REDASH_NAME)-nginx
 NGINX_FOLDER=nginx
 NGINX_IMAGE_TAG=$(shell git log -n 1 --pretty=format:%h $(NGINX_FOLDER))
 NGINX_IMAGE_NAME=$(DOCKER_REPO)/$(NGINX_NAME):$(NGINX_IMAGE_TAG)
-NGINX_HTPASSWD=$(shell curl -s config/$(NANIT_ENV)/$(REDASH_NAME)/htpasswd)
+NGINX_HTPASSWD?=$(shell curl -s config/$(NANIT_ENV)/$(REDASH_NAME)/htpasswd)
 
 define generate-dep
 	if [ -z "$(DB_URL)" ]; then echo "ERROR: DB_URL is empty!"; exit 1; fi
