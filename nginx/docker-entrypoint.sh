@@ -1,3 +1,3 @@
-#!/bin/bash
+#!/bin/sh
 echo $NGINX_HTPASSWD > /etc/nginx/htpasswd
-exec nginx
+exec /usr/sbin/nginx "-g daemon off;"
