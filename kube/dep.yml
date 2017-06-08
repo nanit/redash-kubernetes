@@ -1,0 +1,58 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{REDASH_APP_NAME}}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{REDASH_APP_NAME}}
+    spec:
+      containers:
+        - name: {{REDASH_APP_NAME}}-web
+          image: {{REDASH_IMAGE_NAME}}
+          resources:
+            requests:
+              memory: 1Gi
+          ports:
+            - name: redash-http
+              containerPort: 5000
+          env:
+            - name: REDASH_DATABASE_URL
+              value: {{DB_URL}}
+            - name: REDASH_REDIS_URL
+              value: "redis://localhost:6379/0"
+            - name: PYTHONUNBUFFERED
+              value: "0"
+            - name: REDASH_COOKIE_SECRET
+              value: "nanitsecretlongonehere"
+          args: ["server"]
+        - name: {{REDASH_APP_NAME}}-workers
+          image: {{REDASH_IMAGE_NAME}}
+          resources:
+            requests:
+              memory: 1Gi
+          env:
+            - name: REDASH_DATABASE_URL
+              value: {{DB_URL}}
+            - name: REDASH_REDIS_URL
+              value: "redis://localhost:6379/0"
+            - name: WORKERS_COUNT
+              value: "2"
+            - name: QUEUES
+              value:  "queries,scheduled_queries,celery"
+            - name: PYTHONUNBUFFERED
+              value: "0"
+          args: ["scheduler"]
+        - name: redis
+          image: redis:3.0-alpine
+          ports:
+            - name: redis
+              containerPort: 6379
+        - name: {{NGINX_APP_NAME}}
+          image: {{NGINX_IMAGE_NAME}}
+          ports:
+            - name: nginx
+              containerPort: 80
+
