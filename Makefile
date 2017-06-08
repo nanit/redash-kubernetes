@@ -1,13 +1,14 @@
+DOCKER_REPO?=nanit
 REDASH_NAME=redash
 REDASH_FOLDER=app
 REDASH_IMAGE_TAG=$(shell git log -n 1 --pretty=format:%h $(REDASH_FOLDER))
-REDASH_IMAGE_NAME=nanit/$(REDASH_NAME):$(REDASH_IMAGE_TAG)
+REDASH_IMAGE_NAME=$(DOCKER_REPO)/$(REDASH_NAME):$(REDASH_IMAGE_TAG)
 DB_URL?=$(shell curl -s config/$(NANIT_ENV)/$(REDASH_NAME)/db_url)
 
 NGINX_NAME=$(REDASH_NAME)-nginx
 NGINX_FOLDER=nginx
 NGINX_IMAGE_TAG=$(shell git log -n 1 --pretty=format:%h $(NGINX_FOLDER))
-NGINX_IMAGE_NAME=nanit/$(NGINX_NAME):$(NGINX_IMAGE_TAG)
+NGINX_IMAGE_NAME=$(DOCKER_REPO)/$(NGINX_NAME):$(NGINX_IMAGE_TAG)
 NGINX_HTPASSWD=$(shell curl -s config/$(NANIT_ENV)/$(REDASH_NAME)/htpasswd)
 
 define generate-dep
