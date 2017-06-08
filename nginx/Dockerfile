@@ -1,4 +1,6 @@
 FROM nginx:mainline-alpine
 
+COPY docker-entrypoint.sh /docker-entrypoint.sh
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY htpasswd /etc/nginx/htpasswd
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
