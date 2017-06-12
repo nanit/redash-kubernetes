@@ -53,6 +53,7 @@ define generate-svc
 endef
 
 deploy: docker
+	echo "GENERATING DEPLOYMENT FILE"
 	$(call generate-dep) | kubectl apply -f -
 	kubectl get svc $(REDASH_APP_NAME) || $(call generate-svc) | kubectl create -f -
 
