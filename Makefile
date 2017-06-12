@@ -3,22 +3,24 @@ REDASH_APP_NAME=redash
 REDASH_FOLDER=app
 REDASH_IMAGE_TAG=$(shell git log -n 1 --pretty=format:%h $(REDASH_FOLDER))
 REDASH_IMAGE_NAME=$(DOCKER_REPO)/$(REDASH_APP_NAME):$(REDASH_IMAGE_TAG)
-REDASH_DATABASE_URL?=$(shell curl -s config/$(NANIT_ENV)/$(REDASH_APP_NAME)/database_url)
-REDASH_NAME?=$(shell curl -s config/$(NANIT_ENV)/$(REDASH_APP_NAME)/name)
-REDASH_HOST?=$(shell curl -s config/$(NANIT_ENV)/$(REDASH_APP_NAME)/host)
-REDASH_MAIL_SERVER?=$(shell curl -s config/$(NANIT_ENV)/$(REDASH_APP_NAME)/mail_server)
-REDASH_MAIL_PORT?=$(shell curl -s config/$(NANIT_ENV)/$(REDASH_APP_NAME)/mail_port)
-REDASH_MAIL_USERNAME?=$(shell curl -s config/$(NANIT_ENV)/$(REDASH_APP_NAME)/mail_username)
-REDASH_MAIL_PASSWORD?=$(shell curl -s config/$(NANIT_ENV)/$(REDASH_APP_NAME)/mail_password)
-REDASH_MAIL_DEFAULT_SENDER?=$(shell curl -s config/$(NANIT_ENV)/$(REDASH_APP_NAME)/mail_default_sender)
+REDASH_DATABASE_URL?=$(shell curl config/$(NANIT_ENV)/$(REDASH_APP_NAME)/database_url)
+REDASH_NAME?=$(shell curl config/$(NANIT_ENV)/$(REDASH_APP_NAME)/name)
+REDASH_HOST?=$(shell curl config/$(NANIT_ENV)/$(REDASH_APP_NAME)/host)
+REDASH_MAIL_SERVER?=$(shell curl config/$(NANIT_ENV)/$(REDASH_APP_NAME)/mail_server)
+REDASH_MAIL_PORT?=$(shell curl config/$(NANIT_ENV)/$(REDASH_APP_NAME)/mail_port)
+REDASH_MAIL_USERNAME?=$(shell curl config/$(NANIT_ENV)/$(REDASH_APP_NAME)/mail_username)
+REDASH_MAIL_PASSWORD?=$(shell curl config/$(NANIT_ENV)/$(REDASH_APP_NAME)/mail_password)
+REDASH_MAIL_DEFAULT_SENDER?=$(shell curl config/$(NANIT_ENV)/$(REDASH_APP_NAME)/mail_default_sender)
 
 NGINX_NAME=$(REDASH_APP_NAME)-nginx
 NGINX_FOLDER=nginx
 NGINX_IMAGE_TAG=$(shell git log -n 1 --pretty=format:%h $(NGINX_FOLDER))
 NGINX_IMAGE_NAME=$(DOCKER_REPO)/$(NGINX_NAME):$(NGINX_IMAGE_TAG)
-NGINX_HTPASSWD?=$(shell curl -s config/$(NANIT_ENV)/$(REDASH_APP_NAME)/htpasswd)
+NGINX_HTPASSWD?=$(shell curl config/$(NANIT_ENV)/$(REDASH_APP_NAME)/htpasswd)
 
 define generate-dep
+	echo "CHECKING VARIABLES"
+	echo "VARIABLES OK"
 endef
 
 define generate-svc
