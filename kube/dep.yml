@@ -34,7 +34,7 @@ spec:
             - name: REDASH_MAIL_SERVER
               value: {{REDASH_MAIL_SERVER}}
             - name: REDASH_MAIL_PORT
-              value: {{REDASH_MAIL_PORT}}
+              value: "{{REDASH_MAIL_PORT}}"
             - name: REDASH_MAIL_USERNAME
               value: {{REDASH_MAIL_USERNAME}}
             - name: REDASH_MAIL_PASSWORD
