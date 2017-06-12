@@ -19,6 +19,7 @@ NGINX_IMAGE_NAME=$(DOCKER_REPO)/$(NGINX_NAME):$(NGINX_IMAGE_TAG)
 NGINX_HTPASSWD?=$(shell curl -s config/$(NANIT_ENV)/$(REDASH_APP_NAME)/htpasswd)
 
 define generate-dep
+	echo "CHECKING VARIABLES"
 	if [ -z "$(REDASH_DATABASE_URL)" ]; then echo "ERROR: REDASH_DATABASE_URL is empty!"; exit 1; fi
 	if [ -z "$(REDASH_HOST)" ]; then echo "ERROR: REDASH_HOST is empty!"; exit 1; fi
 	if [ -z "$(REDASH_NAME)" ]; then echo "ERROR: REDASH_NAME is empty!"; exit 1; fi
