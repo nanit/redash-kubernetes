@@ -16,7 +16,6 @@ NGINX_APP_NAME=$(REDASH_APP_NAME)-nginx
 NGINX_FOLDER=nginx
 NGINX_IMAGE_TAG=$(shell git log -n 1 --pretty=format:%h $(NGINX_FOLDER))
 NGINX_IMAGE_NAME=$(DOCKER_REPO)/$(NGINX_APP_NAME):$(NGINX_IMAGE_TAG)
-NGINX_HTPASSWD?=$(shell curl -s config/$(NANIT_ENV)/$(REDASH_APP_NAME)/htpasswd)
 
 define generate-dep
 	if [ -z "$(REDASH_DATABASE_URL)" ]; then echo "ERROR: REDASH_DATABASE_URL is empty!"; exit 1; fi
@@ -27,7 +26,6 @@ define generate-dep
 	if [ -z "$(REDASH_MAIL_USERNAME)" ]; then echo "ERROR: REDASH_MAIL_USERNAME is empty!"; exit 1; fi
 	if [ -z "$(REDASH_MAIL_PASSWORD)" ]; then echo "ERROR: REDASH_MAIL_PASSWORD is empty!"; exit 1; fi
 	if [ -z "$(REDASH_MAIL_DEFAULT_SENDER)" ]; then echo "ERROR: REDASH_MAIL_DEFAULT_SENDER is empty!"; exit 1; fi
-	if [ -z "$(NGINX_HTPASSWD)" ]; then echo "ERROR: NGINX_HTPASSWD is empty!"; exit 1; fi
 	sed -e '\
 		s,{{REDASH_DATABASE_URL}},$(REDASH_DATABASE_URL),g; \
 		s,{{REDASH_APP_NAME}},$(REDASH_APP_NAME),g; \
@@ -40,7 +38,6 @@ define generate-dep
 		s,{{REDASH_MAIL_USERNAME}},$(REDASH_MAIL_USERNAME),g; \
 		s,{{REDASH_MAIL_PASSWORD}},$(REDASH_MAIL_PASSWORD),g; \
 		s,{{REDASH_MAIL_DEFAULT_SENDER}},$(REDASH_MAIL_DEFAULT_SENDER),g; \
-		s,{{NGINX_HTPASSWD}},$(NGINX_HTPASSWD),g; \
 		s,{{NGINX_APP_NAME}},$(NGINX_APP_NAME),g; \
 		s,{{NGINX_IMAGE_NAME}},$(NGINX_IMAGE_NAME),g; \
 		' kube/dep.yml
