@@ -20,7 +20,14 @@ If not, you're more than welcome [to get yourself familiar with it](https://gith
 
 ```
 DOCKER_REPO=my_company_docker_repo \
-DB_URL=postgres://redash-user@postgres/redash-db \
+REDASH_DATABASE_URL=postgres://redash-user@postgres/redash-db \
+REDASH_NAME=my-redash \
+REDASH_HOST=my-redash.my-company.com \
+REDASH_MAIL_SERVER=my.smtp.com \
+REDASH_MAIL_PORT=587 \
+REDASH_MAIL_USERNAME=smtp-user \
+REDASH_MAIL_PASSWORD=smtp-password \
+REDASH_MAIL_DEFAULT_SENDER=my-redash@my-company.com \
 NGINX_HTPASSWD=my-user:some-crypted-password
 make deploy
 ```
