@@ -20,6 +20,15 @@ NGINX_HTPASSWD?=$(shell curl config/$(NANIT_ENV)/$(REDASH_APP_NAME)/htpasswd)
 
 define generate-dep
 	echo "CHECKING VARIABLES"
+	if [ -z "$(REDASH_DATABASE_URL)" ]; then echo "ERROR: REDASH_DATABASE_URL is empty!"; exit 1; fi
+	if [ -z "$(REDASH_HOST)" ]; then echo "ERROR: REDASH_HOST is empty!"; exit 1; fi
+	if [ -z "$(REDASH_NAME)" ]; then echo "ERROR: REDASH_NAME is empty!"; exit 1; fi
+	if [ -z "$(REDASH_MAIL_SERVER)" ]; then echo "ERROR: REDASH_MAIL_SERVER is empty!"; exit 1; fi
+	if [ -z "$(REDASH_MAIL_PORT)" ]; then echo "ERROR: REDASH_MAIL_PORT is empty!"; exit 1; fi
+	if [ -z "$(REDASH_MAIL_USERNAME)" ]; then echo "ERROR: REDASH_MAIL_USERNAME is empty!"; exit 1; fi
+	if [ -z "$(REDASH_MAIL_PASSWORD)" ]; then echo "ERROR: REDASH_MAIL_PASSWORD is empty!"; exit 1; fi
+	if [ -z "$(REDASH_MAIL_DEFAULT_SENDER)" ]; then echo "ERROR: REDASH_MAIL_DEFAULT_SENDER is empty!"; exit 1; fi
+	if [ -z "$(NGINX_HTPASSWD)" ]; then echo "ERROR: NGINX_HTPASSWD is empty!"; exit 1; fi
 	echo "VARIABLES OK"
 endef
 
