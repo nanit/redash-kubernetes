@@ -28,19 +28,19 @@ spec:
             - name: REDASH_COOKIE_SECRET
               value: "nanitsecretlongonehere"
             - name: REDASH_HOST	
-              value: {{REDASH_HOST}}
+              value: "{{REDASH_HOST}}"
             - name: REDASH_NAME
-              value: {{REDASH_NAME}}
+              value: "{{REDASH_NAME}}"
             - name: REDASH_MAIL_SERVER
               value: {{REDASH_MAIL_SERVER}}
             - name: REDASH_MAIL_PORT
               value: "{{REDASH_MAIL_PORT}}"
             - name: REDASH_MAIL_USERNAME
-              value: {{REDASH_MAIL_USERNAME}}
+              value: "{{REDASH_MAIL_USERNAME}}"
             - name: REDASH_MAIL_PASSWORD
-              value: {{REDASH_MAIL_PASSWORD}}
+              value: "{{REDASH_MAIL_PASSWORD}}"
             - name: REDASH_MAIL_DEFAULT_SENDER
-              value: {{REDASH_MAIL_DEFAULT_SENDER}}
+              value: "{{REDASH_MAIL_DEFAULT_SENDER}}"
           args: ["server"]
         - name: {{REDASH_APP_NAME}}-workers
           image: {{REDASH_IMAGE_NAME}}
