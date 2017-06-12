@@ -58,6 +58,16 @@ spec:
               value:  "queries,scheduled_queries,celery"
             - name: PYTHONUNBUFFERED
               value: "0"
+            - name: REDASH_MAIL_SERVER
+              value: {{REDASH_MAIL_SERVER}}
+            - name: REDASH_MAIL_PORT
+              value: "{{REDASH_MAIL_PORT}}"
+            - name: REDASH_MAIL_USERNAME
+              value: "{{REDASH_MAIL_USERNAME}}"
+            - name: REDASH_MAIL_PASSWORD
+              value: "{{REDASH_MAIL_PASSWORD}}"
+            - name: REDASH_MAIL_DEFAULT_SENDER
+              value: "{{REDASH_MAIL_DEFAULT_SENDER}}"
           args: ["scheduler"]
         - name: redis
           image: redis:3.0-alpine
