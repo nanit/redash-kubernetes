@@ -12,10 +12,10 @@ REDASH_MAIL_USERNAME?=$(shell curl -s config/$(NANIT_ENV)/$(REDASH_APP_NAME)/mai
 REDASH_MAIL_PASSWORD?=$(shell curl -s config/$(NANIT_ENV)/$(REDASH_APP_NAME)/mail_password)
 REDASH_MAIL_DEFAULT_SENDER?=$(shell curl -s config/$(NANIT_ENV)/$(REDASH_APP_NAME)/mail_default_sender)
 
-NGINX_NAME=$(REDASH_APP_NAME)-nginx
+NGINX_APP_NAME=$(REDASH_APP_NAME)-nginx
 NGINX_FOLDER=nginx
 NGINX_IMAGE_TAG=$(shell git log -n 1 --pretty=format:%h $(NGINX_FOLDER))
-NGINX_IMAGE_NAME=$(DOCKER_REPO)/$(NGINX_NAME):$(NGINX_IMAGE_TAG)
+NGINX_IMAGE_NAME=$(DOCKER_REPO)/$(NGINX_APP_NAME):$(NGINX_IMAGE_TAG)
 NGINX_HTPASSWD?=$(shell curl -s config/$(NANIT_ENV)/$(REDASH_APP_NAME)/htpasswd)
 
 define generate-dep
