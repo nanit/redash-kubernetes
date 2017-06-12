@@ -30,22 +30,6 @@ define generate-dep
 	if [ -z "$(REDASH_MAIL_DEFAULT_SENDER)" ]; then echo "ERROR: REDASH_MAIL_DEFAULT_SENDER is empty!"; exit 1; fi
 	if [ -z "$(NGINX_HTPASSWD)" ]; then echo "ERROR: NGINX_HTPASSWD is empty!"; exit 1; fi
 	echo "VARIABLES OK"
-	sed -e '\
-		s,{{REDASH_DATABASE_URL}},$(REDASH_DATABASE_URL),s; \
-		s,{{REDASH_APP_NAME}},$(REDASH_APP_NAME),s; \
-		s,{{REDASH_IMAGE_NAME}},$(REDASH_IMAGE_NAME),s; \
-		s,{{REDASH_NAME}},$(REDASH_NAME),s; \
-		s,{{REDASH_HOST}},$(REDASH_HOST),s; \
-		s,{{REDASH_DATABASE_URL}},$(REDASH_DATABASE_URL),s; \
-		s,{{REDASH_MAIL_SERVER}},$(REDASH_MAIL_SERVER),s; \
-		s,{{REDASH_MAIL_PORT}},$(REDASH_MAIL_PORT),s; \
-		s,{{REDASH_MAIL_USERNAME}},$(REDASH_MAIL_USERNAME),s; \
-		s,{{REDASH_MAIL_PASSWORD}},$(REDASH_MAIL_PASSWORD),s; \
-		s,{{REDASH_MAIL_DEFAULT_SENDER}},$(REDASH_MAIL_DEFAULT_SENDER),s; \
-		s,{{NGINX_HTPASSWD}},$(NGINX_HTPASSWD),s; \
-		s,{{NGINX_APP_NAME}},$(NGINX_APP_NAME),s; \
-		s,{{NGINX_IMAGE_NAME}},$(NGINX_IMAGE_NAME),s; \
-		' kube/dep.yml
 endef
 
 define generate-svc
