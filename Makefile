@@ -19,7 +19,6 @@ NGINX_IMAGE_NAME=$(DOCKER_REPO)/$(NGINX_NAME):$(NGINX_IMAGE_TAG)
 NGINX_HTPASSWD?=$(shell curl -s config/$(NANIT_ENV)/$(REDASH_APP_NAME)/htpasswd)
 
 define generate-dep
-	echo "CHECKING VARIABLES"
 	if [ -z "$(REDASH_DATABASE_URL)" ]; then echo "ERROR: REDASH_DATABASE_URL is empty!"; exit 1; fi
 	if [ -z "$(REDASH_HOST)" ]; then echo "ERROR: REDASH_HOST is empty!"; exit 1; fi
 	if [ -z "$(REDASH_NAME)" ]; then echo "ERROR: REDASH_NAME is empty!"; exit 1; fi
@@ -29,7 +28,6 @@ define generate-dep
 	if [ -z "$(REDASH_MAIL_PASSWORD)" ]; then echo "ERROR: REDASH_MAIL_PASSWORD is empty!"; exit 1; fi
 	if [ -z "$(REDASH_MAIL_DEFAULT_SENDER)" ]; then echo "ERROR: REDASH_MAIL_DEFAULT_SENDER is empty!"; exit 1; fi
 	if [ -z "$(NGINX_HTPASSWD)" ]; then echo "ERROR: NGINX_HTPASSWD is empty!"; exit 1; fi
-	echo "VARIABLES OK"
 	sed -e '\
 		s,{{REDASH_DATABASE_URL}},$(REDASH_DATABASE_URL),s; \
 		s,{{REDASH_APP_NAME}},$(REDASH_APP_NAME),s; \
@@ -53,7 +51,6 @@ define generate-svc
 endef
 
 deploy: docker
-	echo "GENERATING DEPLOYMENT FILE"
 	$(call generate-dep) | kubectl apply -f -
 	kubectl get svc $(REDASH_APP_NAME) || $(call generate-svc) | kubectl create -f -
 
