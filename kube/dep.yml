@@ -49,7 +49,7 @@ spec:
               memory: 1Gi
           env:
             - name: REDASH_DATABASE_URL
-              value: {{DB_URL}}
+              value: {{REDASH_DATABASE_URL}}
             - name: REDASH_REDIS_URL
               value: "redis://localhost:6379/0"
             - name: WORKERS_COUNT
