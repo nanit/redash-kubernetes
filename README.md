@@ -47,7 +47,7 @@ Just replace `redash-3940390882-13xgl` with your actual pod name
 
 `kubectl get service redash -o jsonpath="{.status.loadBalancer.ingress[0].hostname}"`
 
-2. Put it into the browser and insert the credentials you've set in your htpasswd file
+2. Put it into the browser and set up the initial user.
 
 That's it, you're in.
 
