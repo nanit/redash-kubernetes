@@ -27,20 +27,24 @@ REDASH_MAIL_SERVER=my.smtp.com \
 REDASH_MAIL_PORT=587 \
 REDASH_MAIL_USERNAME=smtp-user \
 REDASH_MAIL_PASSWORD=smtp-password \
-REDASH_MAIL_DEFAULT_SENDER=my-redash@my-company.com \
-NGINX_HTPASSWD=my-user:some-crypted-password
+REDASH_MAIL_DEFAULT_SENDER=my-redash@my-company.com 
 make deploy
 ```
 
-3. When the redash pod is ready run create_db in order to create the DB schema.
+3. When the redash pod is ready run create_db in order to create the DB schema:
+
 List your redash pods: `kubectl get pods -l app=redash`
+
 Then run the command on the pod:
+
 `kubectl exec redash-3940390882-13xgl -c redash-web -- /app/bin/docker-entrypoint create_db`
+
 Just replace `redash-3940390882-13xgl` with your actual pod name
 
 # Usage
 
 1. Get the ELB hostname which is serving Redash:
+
 `kubectl get service redash -o jsonpath="{.status.loadBalancer.ingress[0].hostname}"`
 
 2. Put it into the browser and insert the credentials you've set in your htpasswd file

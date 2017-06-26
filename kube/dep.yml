@@ -79,6 +79,3 @@ spec:
           ports:
             - name: nginx
               containerPort: 80
-          env:
-            - name: NGINX_HTPASSWD
-              value: "{{NGINX_HTPASSWD}}"
