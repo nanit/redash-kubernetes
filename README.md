@@ -1,3 +1,8 @@
+# DB upgrade after version upgrade
+exec to one of the redash containers and run
+```
+bin/run ./manage.py db upgrade
+```
 # Redash Setup For Kubernetes
 
 If you arrived here, you probably know what Redash is.
