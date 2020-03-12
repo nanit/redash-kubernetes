@@ -79,3 +79,10 @@ spec:
           ports:
             - name: nginx
               containerPort: 80
+      nodeSelector:
+        eks/node-group: redash
+      tolerations:
+        - effect: NoSchedule
+          key: dedicated
+          operator: Equal
+          value: redash
